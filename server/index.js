@@ -7,7 +7,8 @@ var express = require('express')
 var app = express();
 var path = require('path');
 var PythonShell = require('python-shell');
-
+var TMClient = require('textmagic-rest-client');
+var c = new TMClient('williamli1', '1Duphcf3PFygaW7cTmV1x02T7rh9kQ');
 
 // -------------- express initialization -------------- //
 // PORT SETUP - NUMBER SPECIFIC TO THIS SYSTEM
@@ -27,9 +28,17 @@ app.get('/foo', function(req, res){
 });
 
 app.get('/not_a_search', function(req, res){
-    var theQuery = req.query.q;
-    res.send('query parameter:' + theQuery);
+
+  
+
+c.Messages.send({text: 'test message', phones:'5713266568'}, function(err, res){
+    console.log('Messages.send()', err, res);
+    
 });
+res.send('sent');
+
+});
+
 
 app.get('/piglatin', function(req, res){
     console.log(req);
@@ -37,10 +46,11 @@ app.get('/piglatin', function(req, res){
 
     var options = {
         mode: 'text',
-        args: [file]
+        args: [file],
+        scriptPath: "/web/projects/HackTJ2018/public/HackTJ2018/server/"
     };
 
-    PythonShell.run('latin.py', options, function (err, results) {
+    PythonShell.run("latin.py", options, function (err, results) {
         if (err) throw err;
         // results is an array consisting of messages collected during execution
         console.log('results: %j', results);
