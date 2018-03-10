@@ -31,6 +31,24 @@ app.get('/not_a_search', function(req, res){
     res.send('query parameter:' + theQuery);
 });
 
+app.get('/piglatin', function(req, res){
+    console.log(req);
+    var file = __dirname + '/uploads/'+req.query.g; 
+
+    var options = {
+        mode: 'text',
+        args: [file]
+    };
+
+    PythonShell.run('latin.py', options, function (err, results) {
+        if (err) throw err;
+        // results is an array consisting of messages collected during execution
+        console.log('results: %j', results);
+        res.send(results);
+    }); 
+    
+});
+
 
 
 // -------------- listener -------------- //
