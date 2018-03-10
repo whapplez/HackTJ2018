@@ -1,5 +1,6 @@
+import sys
 import wikipedia
-search= input("What are you looking for?")
+search= sys.argv[1]
 
 try:
     print(wikipedia.summary(search,sentences=2))
