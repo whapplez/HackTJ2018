@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">HackTJ2018</string>
+    <string name="app_name">SendMySearch</string>
+    <string name="button1">Send My Search</string>
 </resources>

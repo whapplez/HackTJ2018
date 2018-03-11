@@ -5,7 +5,6 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10dp"
     android:fillViewport="false"
     tools:context="com.google.hacktj2018.ResultActivity">
     <LinearLayout
@@ -16,28 +15,28 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="10dp"
+        android:background="#ffcf68"
          >
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            android:textSize="20dp"/>
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textSize="30dp"/>
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
             android:id="@+id/p1"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10dp"/>
-        <TextView
-            android:id="@+id/p2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="10dp"/>
+            android:textSize="20dp"/>
     </LinearLayout>
 
 

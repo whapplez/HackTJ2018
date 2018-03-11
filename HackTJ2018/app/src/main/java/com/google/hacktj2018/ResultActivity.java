@@ -26,7 +26,6 @@ public class ResultActivity extends AppCompatActivity {
 
         title = (TextView) findViewById(R.id.title);
         p1 = (TextView) findViewById(R.id.p1);
-        p2 = (TextView) findViewById(R.id.p2);
         int number = 1;
 
         Intent i = getIntent();
@@ -52,6 +51,7 @@ public class ResultActivity extends AppCompatActivity {
             }
             System.out.print(bodyText);
         }
+        bodyText = bodyText.replace("\n", "").replace("\r", "");
         p1.setText(bodyText);
 
 //        Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), null, null, null, null);

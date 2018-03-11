@@ -4,23 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     tools:context="com.google.hacktj2018.MainActivity">
 
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_above="@+id/editText"
+        android:layout_alignStart="@+id/search"
+        android:src="@drawable/logo" />
     <EditText
         android:id="@+id/editText"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/search"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="14dp"
-        android:text="search" />
+        android:hint="search" />
 
     <Button
         android:id="@+id/search"
-        android:layout_width="wrap_content"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="203dp" />
+        android:layout_marginBottom="200dp"
+        android:background="@drawable/my_button"
+        android:text="@string/button1"/>
 
 </RelativeLayout>
