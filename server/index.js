@@ -94,7 +94,7 @@ app.get('/testreq', function(req, res) {
     // });
     var urlForSite = "http://hacktj2018.sites.tjhsst.edu/wikiQuery?q=" + req.query.q;
     request.get(urlForSite, function(error, response, body){
-        var urlForSite2 = "http://hacktj2018.sites.tjhsst.edu/email?n=5715944683&c=tmomail.net&s=" + req.query.q + "&m=" + body;
+        var urlForSite2 = "http://hacktj2018.sites.tjhsst.edu/email?n=5715334077&c=txt.att.net&s=" + req.query.q + "&m=" + body;
         request.get(
             urlForSite2,
             function (error2, response2, body2) {
@@ -127,17 +127,17 @@ app.post('/getCall', upload.array(), function(req, res, next) {
     // );
     //DO THE METHOD HERE
     
-    //request.get("http://hacktj2018.sites.tjhsst.edu/wikiQuery?q=" + req.body.text, function(error, response, body){
-        var carrier = "gmail.com";
-        var number = "whapplez";
-        var subject = "hello";
+    request.get("http://hacktj2018.sites.tjhsst.edu/wikiQuery?q=" + req.body.text, function(error, response, body){
+        var carrier = "txt.att.net";
+        var number = req.body.sender.substring(1);
+        var subject = req.body.text;
         
         console.log("===============================")
         console.log("Getting REQ")
         console.log(req.body)
         console.log("===============================")
         
-        var urlForSite = 'http://hacktj2018.sites.tjhsst.edu/email?n=' + number + "&c=" + carrier + "&s=" + subject + "&m=" + req;
+        var urlForSite = 'http://hacktj2018.sites.tjhsst.edu/email?n=' + number + "&c=" + carrier + "&s=" + subject + "&m=" + body;
         request.get(
             urlForSite,
             function (error2, response2, body2) {
@@ -147,7 +147,7 @@ app.post('/getCall', upload.array(), function(req, res, next) {
                 }
             }
         );
-    //});
+    });
     
     /*getRoutes(function(err, data){ 
         if(err) return res.send(err);       

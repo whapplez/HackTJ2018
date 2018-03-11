@@ -5,12 +5,15 @@ function search(searchTerm, callback){
     wiki().search(searchTerm).then(function(data){
         xd = data.results[0];
         wiki().page(xd).then(page => page.summary()).then(function(data2){
+            if(data2.includes("may refer to")){
+                callback("Disambiguous. Try again!@69@");
+            }
             
             var sentenceList = data2.split(". ");
             if (sentenceList.length < 3){
-                callback(data2);
+                callback(data2 + "@69@");
             }else{
-                data2 = sentenceList[0] + ". " + sentenceList[1] + ".";
+                data2 = sentenceList[0] + ". " + sentenceList[1] + ".@69@";
                 callback(data2);
             }
             // if (data2.includes("may refer to")){
