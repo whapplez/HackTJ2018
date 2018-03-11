@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ResultActivity"></activity>
-        <receiver android:name=".IncomingSms">
+        <receiver android:name="com.google.hacktj2018.MainActivity$IncomingSms">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>

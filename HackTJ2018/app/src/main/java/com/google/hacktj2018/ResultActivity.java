@@ -24,26 +24,32 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        title = (TextView)findViewById(R.id.title);
-        p1 = (TextView)findViewById(R.id.p1);
-        p2 = (TextView)findViewById(R.id.p2);
+        title = (TextView) findViewById(R.id.title);
+        p1 = (TextView) findViewById(R.id.p1);
+        p2 = (TextView) findViewById(R.id.p2);
 
-        Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), null, null, null, null);
 
-        if (cursor.moveToFirst()) { // must check the result to prevent exception
-            do {
-                String msgData = "";
-                for(int idx=0;idx<cursor.getColumnCount();idx++)
-                {
-                    msgData += cursor.getString(idx);
-                    title.setText(msgData);
-                    Log.e("tim's secrets", msgData);
-                }
-                // use msgData
-            } while (cursor.moveToNext());
-        } else {
-            // empty box, no SMS
-        }
+        title.setText(getIntent().getStringExtra("msg"));
+
+
+//        Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), null, null, null, null);
+//
+//        if (cursor.moveToFirst()) { // must check the result to prevent exception
+//            do {
+//                String msgData = "";
+//                for(int idx=0;idx<cursor.getColumnCount();idx++)
+//                {
+//                    msgData += cursor.getString(idx);
+//                    title.setText(msgData);
+//                    Log.e("tim's secrets", msgData);
+//                }
+//                // use msgData
+//            } while (cursor.moveToNext());
+//        } else {
+//            // empty box, no SMS
+//        }
+
     }
+
 
 }
