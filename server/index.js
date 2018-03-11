@@ -11,8 +11,9 @@ var TMClient = require('textmagic-rest-client');
 var c = new TMClient('williamli1', '1Duphcf3PFygaW7cTmV1x02T7rh9kQ');
 var nodemailer = require('nodemailer');
 var wikiSearcher = require('./js/searchWiki.js');
+//var $ = require("jQuery");
 
-
+var request = require('request');
 var http = require('http');
 
 // -------------- express initialization -------------- //
@@ -103,26 +104,54 @@ app.get('/not_a_search', function(req, res){
 });
 
 
-app.get('/piglatin', function(req, res){
-    var file = __dirname + '/uploads/'+req.query.g; 
-
-    var options = {
-        mode: 'text',
-        args: [file],
-        scriptPath: "/web/projects/HackTJ2018/public/HackTJ2018/server/"
-    };
-
-    PythonShell.run("latin.py", options, function (err, results) {
-        if (err) throw err;
-        // results is an array consisting of messages collected during execution
-        console.log('results: %j', results);
-        res.send(results);
-    }); 
+app.get('/testreq', function(req, res) {
+    console.log(req.body);
     
+    request.get(
+        'http://hacktj2018.sites.tjhsst.edu/email?n=5713266568&c=txt.att.net&s=kys&m=fjhksdf',
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(body)
+                res.send("done");
+            }
+        }
+    );
+    //DO THE METHOD HERE
+    
+    
+    
+    /*getRoutes(function(err, data){ 
+        if(err) return res.send(err);       
+        res.sendStatus(data);
+    });*/
+
 });
+
+
+
 app.post('/getCall', function(req, res) {
-    res.send('/email')
-    res.sendStatus(200);
+    console.log(req.body);
+    
+    // request.get(
+    //     '/email?n=5713266568&c=txt.att.net&s=kys&m=fjhksdf',
+    //     function (error, response, body) {
+    //         if (!error && response.statusCode == 200) {
+    //             console.log(body)
+    //         }
+    //     }
+    // );
+    //DO THE METHOD HERE
+    
+    request.get(
+        'http://hacktj2018.sites.tjhsst.edu/email?n=5715334077&c=txt.att.net&s=kys&m=fjhksdf',
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(body);
+                res.sendStatus(200);
+            }
+        }
+    );
+    
     /*getRoutes(function(err, data){ 
         if(err) return res.send(err);       
         res.sendStatus(data);
