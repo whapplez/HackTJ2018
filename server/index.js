@@ -11,7 +11,11 @@ var TMClient = require('textmagic-rest-client');
 var c = new TMClient('williamli1', '1Duphcf3PFygaW7cTmV1x02T7rh9kQ');
 var nodemailer = require('nodemailer');
 var wikiSearcher = require('./js/searchWiki.js');
-//var $ = require("jQuery");
+var $ = require("jquery");
+var bodyParser = require('body-parser');
+var multer  = require('multer');
+var upload = multer();
+//var JSON = require("JSON")
 
 var request = require('request');
 var http = require('http');
@@ -84,38 +88,20 @@ app.get('/foo', function(req, res){
     });
 });
 
-app.get('/not_a_search', function(req, res){
-    // c.Messages.send({text: 'test message', phones:'5713266568'}, function(err, res){
-    //     console.log('Messages.send()', err, res);
-    // });
-    var options = {
-        mode: 'text',
-        scriptPath: "/web/projects/HackTJ2018/public/HackTJ2018/server/"
-    };
-    
-    PythonShell.run("wikipedia.py", options, function(err, results){
-       if (err){
-            console.log(err)
-       }
-       res.send('sent');
-       console.log('results: %j', results);
-    });
-
-});
-
-
 app.get('/testreq', function(req, res) {
-    console.log(req.body);
-    
-    request.get(
-        'http://hacktj2018.sites.tjhsst.edu/email?n=5713266568&c=txt.att.net&s=kys&m=fjhksdf',
-        function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                console.log(body)
-                res.send("done");
+    // $.get("wikiQuery", {q: req.query.q}, function(data){
+    //     res.send(data)
+    // });
+    var urlForSite = "http://hacktj2018.sites.tjhsst.edu/wikiQuery?q=" + req.query.q;
+    request.get(urlForSite, function(error, response, body){
+        var urlForSite2 = "http://hacktj2018.sites.tjhsst.edu/email?n=5715944683&c=tmomail.net&s=" + req.query.q + "&m=" + body;
+        request.get(
+            urlForSite2,
+            function (error2, response2, body2) {
+                res.send(body2);
             }
-        }
-    );
+        );
+    });
     //DO THE METHOD HERE
     
     
@@ -129,8 +115,7 @@ app.get('/testreq', function(req, res) {
 
 
 
-app.post('/getCall', function(req, res) {
-    console.log(req.body);
+app.post('/getCall', upload.array(), function(req, res, next) {
     
     // request.get(
     //     '/email?n=5713266568&c=txt.att.net&s=kys&m=fjhksdf',
@@ -142,15 +127,27 @@ app.post('/getCall', function(req, res) {
     // );
     //DO THE METHOD HERE
     
-    request.get(
-        'http://hacktj2018.sites.tjhsst.edu/email?n=5715334077&c=txt.att.net&s=kys&m=fjhksdf',
-        function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                console.log(body);
-                res.sendStatus(200);
+    //request.get("http://hacktj2018.sites.tjhsst.edu/wikiQuery?q=" + req.body.text, function(error, response, body){
+        var carrier = "gmail.com";
+        var number = "whapplez";
+        var subject = "hello";
+        
+        console.log("===============================")
+        console.log("Getting REQ")
+        console.log(req.body)
+        console.log("===============================")
+        
+        var urlForSite = 'http://hacktj2018.sites.tjhsst.edu/email?n=' + number + "&c=" + carrier + "&s=" + subject + "&m=" + req;
+        request.get(
+            urlForSite,
+            function (error2, response2, body2) {
+                if (!error2 && response2.statusCode == 200) {
+                    console.log(body2);
+                    res.sendStatus(200);
+                }
             }
-        }
-    );
+        );
+    //});
     
     /*getRoutes(function(err, data){ 
         if(err) return res.send(err);       
