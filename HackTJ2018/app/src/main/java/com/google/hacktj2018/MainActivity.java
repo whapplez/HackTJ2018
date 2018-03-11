@@ -17,6 +17,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -70,6 +72,14 @@ public class MainActivity extends AppCompatActivity {
 
 
                     } // end for loop
+
+                    ArrayList<String> mes = new ArrayList<String>();
+                    for (String word : text.split(" ")) {
+                        if(word.equals("SUBJ:")){
+
+                        }
+                    }
+
                     Log.i("SmsReceiver", text);
 
                     Intent r = new Intent(mContext, ResultActivity.class);

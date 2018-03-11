@@ -27,10 +27,32 @@ public class ResultActivity extends AppCompatActivity {
         title = (TextView) findViewById(R.id.title);
         p1 = (TextView) findViewById(R.id.p1);
         p2 = (TextView) findViewById(R.id.p2);
+        int number = 1;
 
+        Intent i = getIntent();
+        String blobText = i.getStringExtra("msg");
+        String subj = blobText.substring((blobText.indexOf("SUBJ:") + 5),(blobText.indexOf("MSG:")));
+        title.setText(subj);
 
-        title.setText(getIntent().getStringExtra("msg"));
+        if(blobText.charAt(1) == '1') {
+            number = Character.getNumericValue(blobText.charAt(6));
+        }
 
+        String bodyText = "";
+        for(int j = 0; j < number; j++){
+
+            if(j == 0){
+                bodyText += blobText.substring(blobText.indexOf("MSG:") + 4, blobText.indexOf("(Con't)"));
+            }else if(j == number - 1){
+                String endText = (j + 1) + " of " + (number);
+                bodyText += blobText.substring(blobText.indexOf(endText) + 6, blobText.indexOf("@n9"));
+            }else{
+                String endText = (j + 1) + " of " + (number);
+                bodyText += blobText.substring(blobText.indexOf(endText) + 6, blobText.indexOf("(Con't)", blobText.indexOf(endText)));
+            }
+            System.out.print(bodyText);
+        }
+        p1.setText(bodyText);
 
 //        Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), null, null, null, null);
 //
